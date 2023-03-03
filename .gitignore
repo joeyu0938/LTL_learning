@@ -1,0 +1,7 @@
+env/
+Loader/images_HDR/*.exr
+Loader/images_LDR/*.jpg
+HDR_nolight/*.exr
+models/*.pth
+tend_npy/*.npy
+testing_image/*.jpg

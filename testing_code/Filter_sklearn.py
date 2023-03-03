@@ -6,7 +6,7 @@ import cv2
 from sklearn.linear_model import LinearRegression
 from mpl_toolkits.mplot3d import Axes3D
 import time
-
+#sklearn 不能用cpu
 model = LinearRegression()
 
 class Filter:
@@ -62,6 +62,7 @@ RGBimage = cv2.cvtColor(color, cv2.COLOR_BGR2RGB) #BGR to RGB
 x = Filter(RGBimage)
 elapsed_time = time.time() - start_time
 print(f"Time spanning {elapsed_time}")
+print(f"{x.pixel.shape}")
 cv2.imshow('Result',x.pixel)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
