@@ -32,7 +32,7 @@ def create_parser():
     parser.add_argument('-s','--source', type=str, default='*/images_HDR', help='Choose source folder')
     parser.add_argument('-st','--source_type', type=str, default='HDR', help='Image type of source')
     parser.add_argument('--device', default='cpu', help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
-    parser.add_argument('--Learning_rate', type=float,default=0.2, help='learning rate for 3d regression')
+    parser.add_argument('--Learning_rate', type=float,default=0.05, help='learning rate for 3d regression')
     parser.add_argument('--epoch', type=int,default=1, help='epoch for training 3d regression')
     parser.add_argument('--plot', type=bool,default=False, help='plot for 3d regression')
     parser.add_argument('--filter_size', type=int,default=2, help='filter_size for 3d regression')
@@ -56,7 +56,7 @@ def train(arr,tar_x,tar_y,parser,input):
     torch.manual_seed(0) # 指定網路initial parameters
     
     #create xy feature
-    model = Filter(2, 1)
+    model = Filter(2, 1).to(device)
     criterion = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=parser.Learning_rate)
     xy = list()

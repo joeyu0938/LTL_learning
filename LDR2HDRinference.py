@@ -50,8 +50,8 @@ def parse_arguments(args):
         "Usage:  python3 inference.py --input_path "
     )
     parser = argparse.ArgumentParser(description=usage_text)    
-    parser.add_argument('--input_path', type=str, default='./Loader/images_LDR', help="Input panorama color image file")
-    parser.add_argument('--out_path', type=str, default='./Loader/images_HDR', help='Output folder for the predicted environment map panorama')
+    parser.add_argument('--input_path', type=str, default='C:/Users/User/Desktop/Trainig Dataset/Image', help="Input panorama color image file")
+    parser.add_argument('--out_path', type=str, default='C:/Users/User/Desktop/Trainig Dataset/Label', help='Output folder for the predicted environment map panorama')
     parser.add_argument('-g','--gpu', type=str, default='0', help='GPU id of the device to use. Use -1 for CPU.')    
     parser.add_argument('--ldr2hdr_model', type=str, default='./models/ldr2hdr.pth', help='Pre-trained checkpoint file for ldr2hdr image translation module')
     parser.add_argument("--width", type=float, default=512, help = "Spherical panorama image width.")
@@ -111,6 +111,7 @@ def evaluate(
             
 def main(args):
     device = torch.device("cuda:" + str(args.gpu) if (torch.cuda.is_available() and int(args.gpu) >= 0) else "cpu")    
+    print(device)
     # load LDR2HDR module     
     ldr2hdr_module = LDR2HDR()
     ldr2hdr_module.load_state_dict(torch.load(args.ldr2hdr_model, map_location=torch.device('cpu'))['state_dict_G'])
